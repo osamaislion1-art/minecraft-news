@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">شبكة أخبار ماين كرافت | Osama is Lion</title>
+    <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --border-color: rgba(56, 189, 248, 0.2);
+            --accent-color: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top, #0f172a 0%, var(--bg-color) 100%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); boxShadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); boxShadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); boxShadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .lang-select {
+            background-color: #0f172a !important;
+            color: #f3f4f6 !important;
+            border: 1px solid var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            outline: none;
+            box-shadow: 0 0 15px rgba(31, 111, 235, 0.4);
+        }
+
+        .lang-select option {
+            background-color: #0f172a !important;
+            color: #f3f4f6 !important;
+            padding: 10px;
+        }
+
+        .lang-select:hover {
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(31, 111, 235, 0.2), rgba(9, 105, 218, 0.05));
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            text-shadow: 0 0 20px var(--accent-glow);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.3em;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .search-container {
+            max-width: 950px;
+            margin: 35px auto 0;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        #searchBox {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.2em;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: white;
+            border-radius: 14px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        #searchBox:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        main {
+            max-width: 950px;
+            margin: 30px auto 50px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            border-right: 5px solid var(--accent-color);
+            padding-right: 15px;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        [dir="ltr"] .section-title {
+            border-right: none;
+            border-left: 5px solid var(--accent-color);
+            padding-right: 0;
+            padding-left: 15px;
+        }
+
+        .news-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .news-article {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .news-article:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
+        }
+
+        .news-article:hover::before {
+            opacity: 1;
+        }
+
+        .news-article img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            filter: brightness(0.9);
+        }
+
+        .news-article img:hover {
+            filter: brightness(1);
+        }
+
+        .news-article h2 {
+            color: #60a5fa;
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        .meta {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #1f6feb, #0969da);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(31, 111, 235, 0.3);
+        }
+
+        .news-article p {
+            color: #d1d5db;
+            margin-bottom: 0;
+            font-size: 1.05em;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #1f6feb, #0969da);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95em;
+            box-shadow: 0 0 10px rgba(31, 111, 235, 0.3);
+        }
+
+        .read-more-btn:hover {
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: scale(1.03);
+        }
+
+        .gemini-float-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: linear-gradient(135deg, #38bdf8, #1f6feb);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        .gemini-float-btn:hover {
+            transform: scale(1.15) rotate(15deg);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.9);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            background: rgba(13, 17, 23, 0.9);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="live-status">
+            <div class="pulse-dot"></div>
+            <span id="liveStatusText">مصدر المعلومة: شبكة أرشفة مصادر ماين كرافت الرسمية</span>
+        </div>
+        <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="ar">العربية</option>
+            <option value="en-US">English (US)</option>
+            <option value="en-GB">English (UK)</option>
+            <option value="ja">日本語 (Japanese)</option>
+            <option value="es">Español (Spanish)</option>
+            <option value="fr">Français (French)</option>
+            <option value="tr">Türkçe (Turkish)</option>
+        </select>
+    </div>
+
+    <header>
+        <h1 id="mainTitle">شبكة أخبار ماين كرافت</h1>
+        <p id="mainSubtitle">أحدث أخبار وتحديثات ماين كرافت الرسمية | Osama is Lion</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBox" onkeyup="searchNews()" placeholder="ابحث عن أي خبر أو تحديث داخل الموقع...">
+    </div>
+
+    <main>
+        <section id="newsContainer">
+            <h2 class="section-title" id="archiveTitle">أرشيف الأخبار الحصرية</h2>
+            
+            <div class="news-grid" id="newsGridContainer">
+                <!-- الخبر 1 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Concrete Stairs">
+                    <h2>إضافة أدراج وكسوة الخرسانة (Concrete Stairs & Slabs)</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أضافت استوديوهات موجانج رسمياً في سناب شات تحديث 26.3 الجديد أدراجاً وكسوة لجميع ألوان البلوك الخرساني الـ 16، مما يمنح البناة حرية مطلقة في التصاميم المعمارية الحديثة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 2 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Bundle Items">
+                    <h2>تطوير الأكياس القماشية (Bundles) ودعم تكديس العناصر</h2>
+                    <div class="meta"><span>15 يوليو 2026</span><span class="badge">تحديث 26.1</span></div>
+                    <p>شهدت الأكياس القماشية تحسينات ضخمة تتيح للاعبين تنظيم المخزون بشكل أسرع دون الحاجة لصناديق إضافية، مع دعم كامل للتحكم السريع عبر الماوس.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 3 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Hardcore Mode">
+                    <h2>إصلاحات هامة لنظام وضع الهاردكور (Hardcore Mode)</h2>
+                    <div class="meta"><span>28 يونيو 2026</span><span class="badge">تحديث 26.0</span></div>
+                    <p>تم معالجة الثغرات التي كانت تسمح لبعض اللاعبين بالبقاء على قيد الحياة عند فقدان قلوبهم الأخيرة في السيرفرات الجماعية عبر استغلال خروج الطوارئ.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 4 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Map Player Icon">
+                    <h2>تحديث دقة رمز واتجاه اللاعب على الخرائط</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تم تحسين وتحديث شكل سهم اللاعب على الخرائط ليعرض فوراً وبكل سلاسة الاتجاه الحقيقي الذي ينظر إليه اللاعب دون أي تأخير سابق.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 5 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="OptiFine & Sodium">
+                    <h2>مقارنة أداء مودات تحسين الإطارات (Sodium vs OptiFine)</h2>
+                    <div class="meta"><span>10 يونيو 2026</span><span class="badge">مراجعات تقنية</span></div>
+                    <p>أظهرت اختبارات الأداء الأخيرة تفوق مود Sodium في استقرار معدل الإطارات على إصدارات الجافا الحديثة مقارنة بـ OptiFine التقليدي.</p>
+                    <a href="https://modrinth.com" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Modrinth)</a>
+                </article>
+
+                <!-- الخبر 6 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Swing Animations">
+                    <h2>ميزات وتعديلات حركات التلويح والضرب (Swing Animations)</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أُضيفت خيارات تحكم برمجية جديدة تتيح تحديد أشكال ومدة حركات الضرب والتلويح ضد الكائنات واللاعبين الآخرين في المعارك بدقة عالية.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 7 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Java Edition">
+                    <h2>أبرز الأخطاء المُصلحة في إصدار Java Edition 1.21.x</h2>
+                    <div class="meta"><span>20 مايو 2026</span><span class="badge">تحديث 1.21</span></div>
+                    <p>أصدرت موجانج ترقيعاً برمجياً طارئاً لحل مشاكل انهيار العوالم عند استخدام البوابات المتعددة وبناء مزارع القرويين الآلية الكبرى.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 8 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Realms Support">
+                    <h2>توسيع نطاق خوادم عالم ريلمز (Minecraft Realms)</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>جلب التحديث دعماً لشبكات وبنى تحتية جديدة لخوادم ريلمز في عدة مناطق عالمية لضمان استقرار الاتصال وسرعة استجابة السيرفرات.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 9 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Bedrock Marketplace">
+                    <h2>أهم خرائط البوكس بي في بي في متجر ماين كرافت</h2>
+                    <div class="meta"><span>5 أبريل 2026</span><span class="badge">متجر البدايات</span></div>
+                    <p>استعراض لأفضل خرائط الأساطير والتحديات الجماعية التي تم إضافتها لمتجر ألعاب بيتروك لمساعدة اللاعبين على تحسين مهارات القتال السريع.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 10 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Cushions Update">
+                    <h2>إلغاء خصائص امتصاص الاهتزاز عن الوسائد</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>لم تعد الوسائد تمنع الاهتزازات أو تتفاعل مع مستشعرات سكالك، وتم حل ثغرات الرؤية والالتصاق التي كانت تحدث عند وضعها بجانب الجدران.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 11 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="MultiDrawIndirect">
+                    <h2>ترقية أداء الرسوميات بنظام MultiDrawIndirect</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أصبحت بلوكات التضاريس تُعالج بصرياً عبر تقنية MultiDrawIndirect لرفع معدل الإطارات (FPS) بشكل ملحوظ وتقليل استهلاك كرت الشاشة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 12 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Redstone Mechanics">
+                    <h2>تطوير ميكانيكا طاقة الريدستون والأسلاك اللاسلكية في المودات</h2>
+                    <div class="meta"><span>12 مارس 2026</span><span class="badge">تطوير المودات</span></div>
+                    <p>أصدر مطورو حزم التعديلات أدوات برمجية جديدة تتيح ربط الدوائر الكهربائية بمسافات أبعد دون الحاجة لمسارات طويلة من الأسلاك التقليدية.</p>
+                    <a href="https://curseforge.com" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (CurseForge)</a>
+                </article>
+
+                <!-- الخبر 13 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Level Dat">
+                    <h2>تخزين سجل الإصدارات داخل ملفات العوالم (level.dat)</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أصبح ملف `level.dat` يحتفظ بسجل تاريخ الإصدارات السابقة التي مر بها العالم لحمايته من التلف البرمجي عند نقله بين التحديثات.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 14 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Inventory Reordering">
+                    <h2>إعادة ترتيب وتنسيق قوائم وعناصر التعدين</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تمت إعادة ترتيب العناصر والخامات في قوائم اللعبة لتظهر المواد الأولية غير المتدرجة أولاً لتسهيل عملية التصنيع على اللاعبين.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 15 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Combat Fixes">
+                    <h2>إصلاح نظام قوة الهجوم والـ PvP في السيرفرات</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تم علاج المشكلة التي كانت تعيد تعيين قوة هجوم اللاعب بشكل مزعج أثناء الاشتباكات الجماعية، ليصبح القتال في سيرفرات البوكس بي في بي أكثر عدالة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 16 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Map Colors">
+                    <h2>إزالة خصائص تلوين الخرائط القديمة والمهملة</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>قامت موجانج بتنظيف الأكواد الخلفية عبر إزالة خصائص تلوين الخرائط القديمة غير المستخدمة لتحسين أداء اللعبة وسرعة التحميل.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 17 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Sniffers Fix">
+                    <h2>حل ثغرة توقف حيوانات الشنفري (Sniffers) عن الشمم</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تم رسمياً إصلاح الخطأ البرمجي الذي كان يتسبب في توقف حيوانات الـ Sniffer عن البحث والشم عند إعادة تسجيل الدخول إلى السيرفر.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 18 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Marketplace">
+                    <h2>إضافات جديدة لمتجر ماين كرافت وحزم الأثاث</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أطلق المتجر حزم عوالم جديدة كلياً مثل "Dimension Clash" مع دعم موسع لتصاميم الأثاث والديكورات العصرية داخل اللعبة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 19 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="System Requirements">
+                    <h2>تحديث متطلبات التشغيل الموصى بها لنسخة الجافا</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أعلنت الشركة عن تحديثات طفيفة في متطلبات العتاد الموصى بها لضمان تشغيل التحديثات البصرية القادمة بأعلى كفاءة ممكنة على الحواسيب.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 20 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Release Date">
+                    <h2>الموعد المتوقع لإطلاق النسخة المستقرة من تحديث 26.3</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تشير التوقعات الرسمية واستناداً لجدول استوديوهات موجانج إلى أن الإصدار النهائي المستقر سيصل رسمياً بين أواخر سبتمبر ومنتصف أكتوبر.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 21 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Chunk Generation">
+                    <h2>تحسين خوارزميات توليد التضاريس والتشريعات</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>شهدت سرعة تحميل الـ Chunks قفزة نوعية في سناب شات 26.3، مما يقلل بشكل كبير من تقطيع اللعبة أثناء الطيران بالإليطرا بسرعة عالية.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 22 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/minecraft-key-art-10.jpg" alt="Audio Engine">
+                    <h2>تحديث هندسة ونظام المؤثرات الصوتية المكانية</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>تم تحسين أصوات الكهوف وحركة المياه والرياح في البيئات المختلفة لتصبح أكثر واقعية وعمقاً باستخدام أنظمة الصوت المحيطي الجديدة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+
+                <!-- الخبر 23 -->
+                <article class="news-article">
+                    <img src="https://www.minecraft.net/content/dam/games/minecraft/key-art/Snapshot-7-Header.jpg" alt="Server Performance">
+                    <h2>إصلاحات جذرية لاستهلاك الذاكرة في السيرفرات</h2>
+                    <div class="meta"><span>8 أغسطس 2026</span><span class="badge">تحديث 26.3</span></div>
+                    <p>أجرت موجانج تحسينات عميقة على استهلاك الذاكرة العشوائية (RAM) في السيرفرات الجماعية الكبرى لضمان عدم حدوث لاج أثناء التجمعات الكبيرة.</p>
+                    <a href="https://www.minecraft.net" target="_blank" class="read-more-btn">مصدر المعلومة الرسمي (Minecraft.net)</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <a href="https://gemini.google.com" target="_blank" class="gemini-float-btn" title="اسأل جمناي (Gemini)">✦</a>
+
+    <footer id="footerText">
+        &copy; 2026 شبكة أخبار ماين كرافت (Osama is Lion). جميع الحقوق محفوظة.
+    </footer>
+
+    <script>
+        const translations = {
+            ar: {
+                pageTitle: "شبكة أخبار ماين كرافت | Osama is Lion",
+                mainTitle: "شبكة أخبار ماين كرافت",
+                mainSubtitle: "أحدث أخبار وتحديثات ماين كرافت الرسمية | Osama is Lion",
+                searchPlaceholder: "ابحث عن أي خبر أو تحديث داخل الموقع...",
+                archiveTitle: "أرشيف الأخبار الحصرية",
+                liveStatus: "مصدر المعلومة: شبكة أرشفة مصادر ماين كرافت الرسمية",
+                footer: "&copy; 2026 شبكة أخبار ماين كرافت (Osama is Lion). جميع الحقوق محفوظة."
+            },
+            "en-US": {
+                pageTitle: "Minecraft News Network | Osama is Lion",
+                mainTitle: "Minecraft News Network",
+                mainSubtitle: "Latest official Minecraft updates | Osama is Lion",
+                searchPlaceholder: "Search for any news or update...",
+                archiveTitle: "Exclusive News Archive",
+                liveStatus: "Source: Official Minecraft Sources Network",
+                footer: "&copy; 2026 Minecraft News Network (Osama is Lion). All rights reserved."
+            },
+            "en-GB": {
+                pageTitle: "Minecraft News Network | Osama is Lion",
+                mainTitle: "Minecraft News Network",
+                mainSubtitle: "Latest official Minecraft updates | Osama is Lion",
+                searchPlaceholder: "Search for any news or update...",
+                archiveTitle: "Exclusive News Archive",
+                liveStatus: "Source: Official Minecraft Sources Network",
+                footer: "&copy; 2026 Minecraft News Network (Osama is Lion). All rights reserved."
+            },
+            ja: {
+                pageTitle: "マインクラフトニュースネットワーク | Osama is Lion",
+                mainTitle: "マインクラフトニュースネットワーク",
+                mainSubtitle: "最新の公式マインクラフトニュース | Osama is Lion",
+                searchPlaceholder: "ニュースやアップデートを検索...",
+                archiveTitle: "限定ニュースアーカイブ",
+                liveStatus: "ソース: 公式マインクラフトソースネットワーク",
+                footer: "&copy; 2026 Minecraft News Network (Osama is Lion). All rights reserved."
+            },
+            es: {
+                pageTitle: "Red de Noticias de Minecraft | Osama is Lion",
+                mainTitle: "Red de Noticias de Minecraft",
+                mainSubtitle: "Últimas actualizaciones oficiales de Minecraft | Osama is Lion",
+                searchPlaceholder: "Busca cualquier noticia o actualización...",
+                archiveTitle: "Archivo de Noticias Exclusivas",
+                liveStatus: "Fuente: Red de Fuentes Oficiales de Minecraft",
+                footer: "&copy; 2026 Red de Noticias de Minecraft (Osama is Lion). Todos los derechos reservados."
+            },
+            fr: {
+                pageTitle: "Réseau d'actualités Minecraft | Osama is Lion",
+                mainTitle: "Réseau d'actualités Minecraft",
+                mainSubtitle: "Dernières actualités officielles de Minecraft | Osama is Lion",
+                searchPlaceholder: "Rechercher une actualité ou une mise à jour...",
+                archiveTitle: "Archives des actualités exclusives",
+                liveStatus: "Source : Réseau de sources officielles Minecraft",
+                footer: "&copy; 2026 Réseau d'actualités Minecraft (Osama is Lion). Tous droits réservés."
+            },
+            tr: {
+                pageTitle: "Minecraft Haber Ağı | Osama is Lion",
+                mainTitle: "Minecraft Haber Ağı",
+                mainSubtitle: "En son resmi Minecraft güncellemeleri | Osama is Lion",
+                searchPlaceholder: "Herhangi bir haber veya güncelleme arayın...",
+                archiveTitle: "Özel Haber Arşivi",
+                liveStatus: "Kaynak: Resmi Minecraft Kaynakları Ağı",
+                footer: "&copy; 2026 Minecraft Haber Ağı (Osama is Lion). Tüm hakları saklıdır."
+            }
+        };
+
+        function changeLanguage(lang) {
+            const htmlRoot = document.getElementById('htmlRoot');
+            const t = translations[lang];
+
+            htmlRoot.setAttribute('lang', lang);
+            if (lang === 'ar') {
+                htmlRoot.setAttribute('dir', 'rtl');
+            } else {
+                htmlRoot.setAttribute('dir', 'ltr');
+            }
+
+            document.getElementById('pageTitle').innerText = t.pageTitle;
+            document.getElementById('mainTitle').innerText = t.mainTitle;
+            document.getElementById('mainSubtitle').innerText = t.mainSubtitle;
+            document.getElementById('searchBox').placeholder = t.searchPlaceholder;
+            document.getElementById('archiveTitle').innerText = t.archiveTitle;
+            document.getElementById('liveStatusText').innerText = t.liveStatus;
+            document.getElementById('footerText').innerHTML = t.footer;
+        }
+
+        function searchNews() {
+            let input = document.getElementById('searchBox').value.toLowerCase().trim();
+            let articles = document.getElementsByClassName('news-article');
+
+            for (let i = 0; i < articles.length; i++) {
+                let title = articles[i].getElementsByTagName('h2')[0].innerText.toLowerCase();
+                let content = articles[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+
+                if (input === "" || title.includes(input) || content.includes(input)) {
+                    articles[i].style.display = "";
+                } else {
+                    articles[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
