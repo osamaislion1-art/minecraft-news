@@ -65,11 +65,22 @@
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
             padding: 1.5rem 2rem;
-            text-align: center;
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-top: auto;
         }
+        .palestine-flag {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .stripe { flex: 1; width: 100%; }
+        .stripe-black { background: #000000; }
+        .stripe-white { background: #FFFFFF; }
+        .stripe-green { background: #007A3D; }
     </style>
 </head>
 <body>
@@ -101,6 +112,11 @@
     </div>
 
     <footer>
+        <div class="palestine-flag" title="فلسطين حرة">
+            <div class="stripe stripe-black"></div>
+            <div class="stripe stripe-white"></div>
+            <div class="stripe stripe-green"></div>
+        </div>
         <div>جميع الحقوق محفوظة © 2026 Osama is Lion</div>
     </footer>
 
