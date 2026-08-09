@@ -63,11 +63,28 @@
             justify-content: space-between;
             align-items: center;
         }
-        /* تثبيت العلم على أقصى اليسار بوضوح تام */
-        .footer-flag {
-            font-size: 2rem;
-            direction: ltr;
-            unicode-bidi: embed;
+        .palestine-flag {
+            display: inline-flex;
+            width: 45px;
+            height: 30px;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .flag-stripe { flex: 1; width: 100%; }
+        .stripe-black { background: #000000; }
+        .stripe-white { background: #FFFFFF; }
+        .stripe-green { background: #007A3D; }
+        .flag-triangle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 22px solid #CE1126;
         }
     </style>
 </head>
@@ -94,13 +111,18 @@
             </div>
             <div class="card">
                 <h2>📢 نصائح الاحتراف</h2>
-                <p>أسرار وحيل للسيادة الكاملة في ساحات القتال.</p>
+                <p>أسرار والحيل للسيادة الكاملة في ساحات القتال.</p>
             </div>
         </div>
     </main>
 
     <footer>
-        <div class="footer-flag">🇵🇸</div>
+        <div class="palestine-flag">
+            <div class="flag-stripe stripe-black"></div>
+            <div class="flag-stripe stripe-white"></div>
+            <div class="flag-stripe stripe-green"></div>
+            <div class="flag-triangle"></div>
+        </div>
         <div>جميع الحقوق محفوظة © 2026 Osama is Lion</div>
     </footer>
 
