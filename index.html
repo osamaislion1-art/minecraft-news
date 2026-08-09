@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="htmlRoot">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- تحسينات السيو العالمية ووسوم المشاركة -->
-    <title id="pageTitle">شبكة أخبار ماين كرافت | Osama is Lion</title>
-    <meta name="description" content="الموقع الرسمي لأحدث أخبار وسيرفرات ماين كرافت والبطولات مع Osama is Lion">
-    <meta name="keywords" content="Minecraft, ماين كرافت, أخبار ماين كرافت, Zitrex, Osama is Lion">
-    <meta name="author" content="Osama is Lion">
+    <title>شبكة أخبار ماين كرافت | Osama is Lion</title>
     
     <style>
         :root {
@@ -16,12 +11,11 @@
             --card-bg: rgba(22, 27, 34, 0.75);
             --border-color: rgba(56, 189, 248, 0.2);
             --accent-color: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s ease; }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,31 +37,12 @@
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
-
-        .lang-switch {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .lang-switch:hover {
-            background: var(--accent-color);
-            color: #030712;
         }
 
         main {
@@ -87,7 +62,7 @@
             margin-bottom: 2rem;
         }
 
-        h1, h2 {
+        h1 {
             color: var(--accent-color);
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
@@ -107,52 +82,18 @@
 
     <header>
         <div class="logo">Osama is Lion 🦁</div>
-        <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
     </header>
 
     <main>
         <div class="card">
-            <h1 id="mainTitle">شبكة أخبار ماين كرافت</h1>
-            <p id="mainDesc">أهلاً بك في الموقع الرسمي لأحدث أخبار ماين كرافت، السيرفرات، والتحديثات الحصرية.</p>
-            <p>جميع الأخبار والمحتوى أدناه منشور باللغة العربية حصرياً كما طلبت يا أسطورة:</p>
-            <ul>
-                <li>تحديثات سيرفرات البوكس بي في بي (Box PvP) وتكتيكات الفوز.</li>
-                <li>أحدث مودات وسكنات ماين كرافت المصممة خصيصاً.</li>
-            </ul>
+            <h1>شبكة أخبار ماين كرافت</h1>
+            <p>أهلاً بك في الموقع الرسمي لأحدث أخبار سيرفر Zitrex ونمط Box PvP.</p>
         </div>
     </main>
 
     <footer>
-        <p id="footerText">جميع الحقوق محفوظة © 2026 Osama is Lion 🇵🇸</p>
+        <p>جميع الحقوق محفوظة © 2026 Osama is Lion 🇵🇸</p>
     </footer>
 
-    <script>
-        let currentLang = 'ar';
-        function toggleLanguage() {
-            const footerText = document.getElementById('footerText');
-            const langBtn = document.getElementById('langBtn');
-            const mainTitle = document.getElementById('mainTitle');
-            const mainDesc = document.getElementById('mainDesc');
-            const htmlRoot = document.getElementById('htmlRoot');
-
-            if (currentLang === 'ar') {
-                currentLang = 'en';
-                htmlRoot.setAttribute('dir', 'ltr');
-                htmlRoot.setAttribute('lang', 'en');
-                langBtn.innerText = 'العربية';
-                mainTitle.innerText = 'Minecraft News Network';
-                mainDesc.innerText = 'Welcome to the official site for the latest Minecraft news, servers, and exclusive updates.';
-                footerText.innerHTML = 'All Rights Reserved © 2026 Osama is Lion 🇵🇸';
-            } else {
-                currentLang = 'ar';
-                htmlRoot.setAttribute('dir', 'rtl');
-                htmlRoot.setAttribute('lang', 'ar');
-                langBtn.innerText = 'English';
-                mainTitle.innerText = 'شبكة أخبار ماين كرافت';
-                mainDesc.innerText = 'أهلاً بك في الموقع الرسمي لأحدث أخبار ماين كرافت، السيرفرات، والتحديثات الحصرية.';
-                footerText.innerHTML = 'جميع الحقوق محفوظة © 2026 Osama is Lion 🇵🇸';
-            }
-        }
-    </script>
 </body>
 </html>
