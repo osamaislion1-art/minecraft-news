@@ -1,90 +1,194 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="lion">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبكة أخبار ماين كرافت | Osama is Lion</title>
+    <title>معاينة دروع ماين كرافت | Armor Trim Studio</title>
     <style>
-        :root {
+        /* تعريف متغيرات الألوان للثلاث ثيمات */
+        :root[data-theme="lion"] {
             --bg-color: #030712;
             --card-bg: rgba(22, 27, 34, 0.85);
-            --border-color: rgba(56, 189, 248, 0.25);
+            --border-color: rgba(56, 189, 248, 0.3);
             --accent-color: #38bdf8;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --header-bg: rgba(15, 23, 42, 0.9);
         }
-        * { box-sizing: border-box; }
+
+        :root[data-theme="dark"] {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+            --accent-color: #bb86fc;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --header-bg: #181818;
+        }
+
+        :root[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #cbd5e1;
+            --accent-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --header-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--bg-color);
             color: var(--text-main);
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
         header {
-            background: var(--card-bg);
+            background: var(--header-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 1.2rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .logo { font-size: 1.6rem; font-weight: bold; color: var(--accent-color); }
-        .main-container {
-            max-width: 1000px;
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); display: flex; align-items: center; gap: 8px; }
+
+        .theme-selector {
+            display: flex;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .theme-btn.active, .theme-btn:hover {
+            background: var(--accent-color);
+            color: #030712;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1100px;
             margin: 2rem auto;
             padding: 0 1.5rem;
+            width: 100%;
         }
-        .hero-banner {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .hero-banner h1 { color: var(--accent-color); margin-top: 0; }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .card {
+
+        .hero {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .card h2 { color: var(--accent-color); font-size: 1.2rem; margin-top: 0; }
+
+        .hero h1 { color: var(--accent-color); font-size: 2.2rem; margin-top: 0; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .tool-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .tool-container h2 { color: var(--accent-color); }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Osama is Lion 🦁</div>
+        <div class="logo">🦁 ArmorTrim Pro</div>
+        <div class="theme-selector">
+            <button class="theme-btn active" onclick="setTheme('lion')">أساما</button>
+            <button class="theme-btn" onclick="setTheme('dark')">داكن</button>
+            <button class="theme-btn" onclick="setTheme('light')">عادي</button>
+        </div>
     </header>
 
-    <div class="main-container">
-        <div class="hero-banner">
-            <h1>شبكة أخبار ماين كرافت الرسمية</h1>
-            <p>المكان الأول لتغطية أحدث تحديثات السيرفرات والبوكس بي في بي.</p>
+    <main>
+        <div class="hero">
+            <h1>معاينة أشكال الدروع والـ Armor Trims</h1>
+            <p>لا تخسر مواردك النادرة بعد اليوم! شاهد شكل درعك وتصميمه قبل تركيبه في اللعبة.</p>
         </div>
 
-        <div class="grid-container">
-            <div class="card">
-                <h2>⚔️ أخبار Box PvP</h2>
-                <p>تعرف على أحدث الإضافات والخصائص في السيرفرات.</p>
-            </div>
-            <div class="card">
-                <h2>🔥 أحدث المودات</h2>
-                <p>استعرض أفضل السكنات والمودات لتجربة أسطورية.</p>
-            </div>
-            <div class="card">
-                <h2>📢 نصائح الاحتراف</h2>
-                <p>أسرار والحيل للسيادة الكاملة في ساحات القتال.</p>
-            </div>
+        <div class="tool-container">
+            <h2>⚙️ أداة المعاينة قيد التجهيز...</h2>
+            <p>هنا سيتم عرض الدرع التفاعلي واختيار الألوان والـ Trims بكل سهولة.</p>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 | مصمم لخدمة ملايين اللاعبين بواسطة Osama is Lion</p>
+    </footer>
+
+    <script>
+        function setTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('site_theme', themeName);
+            
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // استرجاع الثيم المحفوظ مسبقاً إن وجد
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('site_theme') || 'lion';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                if((savedTheme === 'lion' && btn.textContent === 'أساما') ||
+                   (savedTheme === 'dark' && btn.textContent === 'داكن') ||
+                   (savedTheme === 'light' && btn.textContent === 'عادي')) {
+                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
