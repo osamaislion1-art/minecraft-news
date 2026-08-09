@@ -5,100 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>شبكة أخبار ماين كرافت | Osama is Lion</title>
     <style>
+        :root {
+            --bg-color: #030712;
+            --card-bg: rgba(22, 27, 34, 0.85);
+            --border-color: rgba(56, 189, 248, 0.25);
+            --accent-color: #38bdf8;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * { box-sizing: border-box; }
         body {
-            background-color: #030712;
-            color: #f3f4f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         header {
-            background: rgba(22, 27, 34, 0.85);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
             padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo { font-size: 1.6rem; font-weight: bold; color: #38bdf8; }
-        .lang-btn {
-            background: transparent;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #f3f4f6;
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-        .lang-btn:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: #38bdf8;
-        }
-        main {
-            flex: 1;
+        .logo { font-size: 1.6rem; font-weight: bold; color: var(--accent-color); }
+        .main-container {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1.5rem;
-            width: 100%;
-            box-sizing: border-box;
         }
         .hero-banner {
             background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2.5rem;
             text-align: center;
             margin-bottom: 2rem;
         }
-        .hero-banner h1 { color: #38bdf8; margin-top: 0; }
+        .hero-banner h1 { color: var(--accent-color); margin-top: 0; }
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
         }
         .card {
-            background: rgba(22, 27, 34, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.5rem;
         }
-        .card h2 { color: #38bdf8; font-size: 1.2rem; margin-top: 0; }
-        
-        footer {
-            background: rgba(22, 27, 34, 0.85);
-            border-top: 1px solid rgba(56, 189, 248, 0.25);
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .palestine-flag {
-            width: 50px;
-            height: 32px;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #444;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-        .stripe { flex: 1; width: 100%; }
-        .black { background: #000000; }
-        .white { background: #FFFFFF; }
-        .green { background: #007A3D; }
+        .card h2 { color: var(--accent-color); font-size: 1.2rem; margin-top: 0; }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="lang-btn">English</button>
         <div class="logo">Osama is Lion 🦁</div>
     </header>
 
-    <main>
+    <div class="main-container">
         <div class="hero-banner">
             <h1>شبكة أخبار ماين كرافت الرسمية</h1>
             <p>المكان الأول لتغطية أحدث تحديثات السيرفرات والبوكس بي في بي.</p>
@@ -118,16 +84,7 @@
                 <p>أسرار والحيل للسيادة الكاملة في ساحات القتال.</p>
             </div>
         </div>
-    </main>
-
-    <footer>
-        <div class="palestine-flag" title="فلسطين حرة">
-            <div class="stripe black"></div>
-            <div class="stripe white"></div>
-            <div class="stripe green"></div>
-        </div>
-        <div>جميع الحقوق محفوظة © 2026 Osama is Lion</div>
-    </footer>
+    </div>
 
 </body>
 </html>
