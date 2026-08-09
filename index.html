@@ -19,8 +19,25 @@
             background: rgba(22, 27, 34, 0.85);
             border-bottom: 1px solid rgba(56, 189, 248, 0.25);
             padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .logo { font-size: 1.6rem; font-weight: bold; color: #38bdf8; }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #f3f4f6;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .lang-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+        }
         main {
             flex: 1;
             max-width: 1000px;
@@ -51,7 +68,6 @@
         }
         .card h2 { color: #38bdf8; font-size: 1.2rem; margin-top: 0; }
         
-        /* تصميم الفوتر وعلم فلسطين بوضوح ت تام */
         footer {
             background: rgba(22, 27, 34, 0.85);
             border-top: 1px solid rgba(56, 189, 248, 0.25);
@@ -78,6 +94,7 @@
 <body>
 
     <header>
+        <button class="lang-btn">English</button>
         <div class="logo">Osama is Lion 🦁</div>
     </header>
 
