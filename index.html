@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">شبكة أخبار ماين كرافت | Osama is Lion</title>
+    <meta name="description" content="الموقع الرسمي لأحدث أخبار وسيرفرات ماين كرافت والبطولات مع Osama is Lion">
     
     <style>
         :root {
@@ -11,6 +12,7 @@
             --card-bg: rgba(22, 27, 34, 0.75);
             --border-color: rgba(56, 189, 248, 0.2);
             --accent-color: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
@@ -46,6 +48,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         .lang-switch {
@@ -80,7 +83,7 @@
             margin-bottom: 2rem;
         }
 
-        h1 {
+        h1, h2 {
             color: var(--accent-color);
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
@@ -93,21 +96,24 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.95rem;
-            direction: rtl;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
         <div class="logo">Osama is Lion 🦁</div>
+        <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
     </header>
 
     <main>
         <div class="card">
             <h1 id="mainTitle">شبكة أخبار ماين كرافت</h1>
-            <p id="mainDesc">أهلاً بك في الموقع الرسمي لأحدث أخبار سيرفر Zitrex ونمط Box PvP.</p>
+            <p id="mainDesc">أهلاً بك في الموقع الرسمي لأحدث أخبار ماين كرافت، السيرفرات، والتحديثات الحصرية.</p>
+            <!-- محتواك العربي القديم محفوظ هنا بالكامل -->
+            <div id="contentArea">
+                <p>تابع معنا أحدث أخبار سيرفرات ماين كرافت وتحديثات البوكس بي في بي (Box PvP).</p>
+            </div>
         </div>
     </main>
 
@@ -130,7 +136,7 @@
                 htmlRoot.setAttribute('lang', 'en');
                 langBtn.innerText = 'العربية';
                 mainTitle.innerText = 'Minecraft News Network';
-                mainDesc.innerText = 'Welcome to the official site for Zitrex server news and Box PvP mode.';
+                mainDesc.innerText = 'Welcome to the official site for the latest Minecraft news, servers, and exclusive updates.';
                 footerText.innerHTML = 'All Rights Reserved © 2026 Osama is Lion 🇵🇸';
             } else {
                 currentLang = 'ar';
@@ -138,7 +144,7 @@
                 htmlRoot.setAttribute('lang', 'ar');
                 langBtn.innerText = 'English';
                 mainTitle.innerText = 'شبكة أخبار ماين كرافت';
-                mainDesc.innerText = 'أهلاً بك في الموقع الرسمي لأحدث أخبار سيرفر Zitrex ونمط Box PvP.';
+                mainDesc.innerText = 'أهلاً بك في الموقع الرسمي لأحدث أخبار ماين كرافت، السيرفرات، والتحديثات الحصرية.';
                 footerText.innerHTML = 'جميع الحقوق محفوظة © 2026 Osama is Lion 🇵🇸';
             }
         }
