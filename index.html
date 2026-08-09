@@ -183,8 +183,8 @@
     </main>
 
     <footer>
-        <div id="footerLeft">🇵🇸</div>
-        <div id="footerRight">جميع الحقوق محفوظة © 2026 Osama is Lion</div>
+        <div id="footerText">جميع الحقوق محفوظة © 2026 Osama is Lion</div>
+        <div style="font-size: 1.5rem;">🇵🇸</div>
     </footer>
 
     <script>
@@ -200,7 +200,7 @@
             const section2Text = document.getElementById('section2Text');
             const section3Title = document.getElementById('section3Title');
             const section3Text = document.getElementById('section3Text');
-            const footerRight = document.getElementById('footerRight');
+            const footerText = document.getElementById('footerText');
 
             if (currentLang === 'ar') {
                 currentLang = 'en';
@@ -215,7 +215,7 @@
                 section2Text.innerText = 'Explore custom skins and top-tier mods that give you an legendary gameplay experience.';
                 section3Title.innerText = '📢 Pro Tips & Tricks';
                 section3Text.innerText = 'New secrets and strategies used by pros to boost building skills and dominate the arena.';
-                footerRight.innerText = 'All Rights Reserved © 2026 Osama is Lion';
+                footerText.innerText = 'All Rights Reserved © 2026 Osama is Lion';
             } else {
                 currentLang = 'ar';
                 htmlRoot.setAttribute('dir', 'rtl');
@@ -229,7 +229,7 @@
                 section2Text.innerText = 'استعرض معنا أفضل السكنات المخصصة والمودات اللي بتعطيك تجربة لعب أسطورية ومظهر خارجي فخم لشخصيتك.';
                 section3Title.innerText = '📢 نصائح وحيل الاحتراف';
                 section3Text.innerText = 'أسرار وحيل جديدة بيستخدمها المحترفون لتطوير مهارات البناء والسرعة والسيطرة الكاملة في ساحات القتال.';
-                footerRight.innerText = 'جميع الحقوق محفوظة © 2026 Osama is Lion';
+                footerText.innerText = 'جميع الحقوق محفوظة © 2026 Osama is Lion';
             }
         }
     </script>
