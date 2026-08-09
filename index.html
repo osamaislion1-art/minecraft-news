@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">شبكة أخبار ماين كرافت | Osama is Lion</title>
-    <meta name="description" content="الموقع الرسمي لأحدث أخبار وسيرفرات ماين كرافت والبطولات مع Osama is Lion">
-    <meta name="keywords" content="Minecraft, ماين كرافت, أخبار ماين كرافت, Zitrex, Box PvP, Osama is Lion">
     
     <style>
         :root {
             --bg-color: #030712;
-            --card-bg: rgba(22, 27, 34, 0.85);
-            --border-color: rgba(56, 189, 248, 0.25);
+            --card-bg: rgba(22, 27, 34, 0.75);
+            --border-color: rgba(56, 189, 248, 0.2);
             --accent-color: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
@@ -35,7 +32,7 @@
         header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 1.2rem 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -43,35 +40,11 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: var(--accent-color);
-            text-shadow: 0 0 12px var(--accent-glow);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
             color: var(--accent-color);
         }
 
@@ -79,7 +52,7 @@
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 0.5rem 1.2rem;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
@@ -88,91 +61,38 @@
         .lang-switch:hover {
             background: var(--accent-color);
             color: #030712;
-            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         main {
             flex: 1;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
-            margin: 2.5rem auto;
+            margin: 2rem auto;
             padding: 0 1.5rem;
-        }
-
-        .hero-banner {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(15, 23, 42, 0.8));
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-banner h1 {
-            font-size: 2.2rem;
-            color: var(--accent-color);
-            margin-top: 0;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .hero-banner p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 1.8rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
         }
 
-        .card h2 {
+        h1 {
             color: var(--accent-color);
-            font-size: 1.3rem;
-            margin-top: 0;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
         }
 
-        .card p, .card ul {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .card ul {
-            padding-right: 20px;
-        }
-
-        .card li {
-            margin-bottom: 0.5rem;
-        }
-
         footer {
             text-align: center;
-            padding: 1.8rem;
+            padding: 1.5rem;
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 1rem;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-banner h1 { font-size: 1.6rem; }
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -180,36 +100,13 @@
 
     <header>
         <div class="logo">Osama is Lion 🦁</div>
-        <ul class="nav-links">
-            <li><a href="#" id="navHome">الرئيسية</a></li>
-            <li><a href="#" id="navNews">الأخبار</a></li>
-            <li><a href="#" id="navServers">السيرفرات</a></li>
-            <li><a href="#" id="navContact">تواصل معنا</a></li>
-        </ul>
         <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">English</button>
     </header>
 
     <main>
-        <div class="hero-banner">
-            <h1 id="mainTitle">شبكة أخبار ماين كرافت الرسمية</h1>
-            <p id="mainDesc">المكان الأول لتغطية أحدث تحديثات السيرفرات، بطولات البوكس بي في بي (Box PvP)، وأقوى المودات والسكنات الحصرية مع أسامة!</p>
-        </div>
-
-        <div class="grid-container">
-            <div class="card">
-                <h2 id="section1Title">⚔️ أخبار سيرفرات Box PvP</h2>
-                <p id="section1Text">تعرف على أحدث الإضافات والخصائص في سيرفرات ماين كرافت المشهورة وكيف تحترف القتال وتجمع الموارد بسرعة فائقة.</p>
-            </div>
-
-            <div class="card">
-                <h2 id="section2Title">🔥 أحدث المودات والتصميمات</h2>
-                <p id="section2Text">استعرض معنا أفضل السكنات المخصصة والمودات اللي بتعطيك تجربة لعب أسطورية ومظهر خارجي فخم لشخصيتك.</p>
-            </div>
-
-            <div class="card">
-                <h2 id="section3Title">📢 نصائح وحيل الاحتراف</h2>
-                <p id="section3Text">أسرار وحيل جديدة بيستخدمها المحترفون لتطوير مهارات البناء والسرعة والسيطرة الكاملة في ساحات القتال.</p>
-            </div>
+        <div class="card">
+            <h1 id="mainTitle">شبكة أخبار ماين كرافت</h1>
+            <p id="mainDesc">أهلاً بك في الموقع الرسمي لأحدث أخبار سيرفر Zitrex ونمط Box PvP.</p>
         </div>
     </main>
 
@@ -220,57 +117,27 @@
     <script>
         let currentLang = 'ar';
         function toggleLanguage() {
-            const htmlRoot = document.getElementById('htmlRoot');
+            const footerText = document.getElementById('footerText');
             const langBtn = document.getElementById('langBtn');
-            const navHome = document.getElementById('navHome');
-            const navNews = document.getElementById('navNews');
-            const navServers = document.getElementById('navServers');
-            const navContact = document.getElementById('navContact');
             const mainTitle = document.getElementById('mainTitle');
             const mainDesc = document.getElementById('mainDesc');
-            const section1Title = document.getElementById('section1Title');
-            const section1Text = document.getElementById('section1Text');
-            const section2Title = document.getElementById('section2Title');
-            const section2Text = document.getElementById('section2Text');
-            const section3Title = document.getElementById('section3Title');
-            const section3Text = document.getElementById('section3Text');
-            const footerText = document.getElementById('footerText');
+            const htmlRoot = document.getElementById('htmlRoot');
 
             if (currentLang === 'ar') {
                 currentLang = 'en';
                 htmlRoot.setAttribute('dir', 'ltr');
                 htmlRoot.setAttribute('lang', 'en');
                 langBtn.innerText = 'العربية';
-                navHome.innerText = 'Home';
-                navNews.innerText = 'News';
-                navServers.innerText = 'Servers';
-                navContact.innerText = 'Contact';
-                mainTitle.innerText = 'Official Minecraft News Network';
-                mainDesc.innerText = 'The ultimate place for the latest server updates, Box PvP tournaments, and exclusive mods with Osama!';
-                section1Title.innerText = '⚔️ Box PvP Server News';
-                section1Text.innerText = 'Discover the latest features and updates in popular Minecraft servers and how to master PvP combat.';
-                section2Title.innerText = '🔥 Latest Mods & Skins';
-                section2Text.innerText = 'Explore custom skins and top-tier mods that give you an legendary gameplay experience.';
-                section3Title.innerText = '📢 Pro Tips & Tricks';
-                section3Text.innerText = 'New secrets and strategies used by pros to boost building skills and dominate the arena.';
+                mainTitle.innerText = 'Minecraft News Network';
+                mainDesc.innerText = 'Welcome to the official site for Zitrex server news and Box PvP mode.';
                 footerText.innerHTML = 'All Rights Reserved © 2026 Osama is Lion 🇵🇸';
             } else {
                 currentLang = 'ar';
                 htmlRoot.setAttribute('dir', 'rtl');
                 htmlRoot.setAttribute('lang', 'ar');
                 langBtn.innerText = 'English';
-                navHome.innerText = 'الرئيسية';
-                navNews.innerText = 'الأخبار';
-                navServers.innerText = 'السيرفرات';
-                navContact.innerText = 'تواصل معنا';
-                mainTitle.innerText = 'شبكة أخبار ماين كرافت الرسمية';
-                mainDesc.innerText = 'المكان الأول لتغطية أحدث تحديثات السيرفرات، بطولات البوكس بي في بي (Box PvP)، وأقوى المودات والسكنات الحصرية مع أسامة!';
-                section1Title.innerText = '⚔️ أخبار سيرفرات Box PvP';
-                section1Text.innerText = 'تعرف على أحدث الإضافات والخصائص في سيرفرات ماين كرافت المشهورة وكيف تحترف القتال وتجمع الموارد بسرعة فائقة.';
-                section2Title.innerText = '🔥 أحدث المودات والتصميمات';
-                section2Text.innerText = 'استعرض معنا أفضل السكنات المخصصة والمودات اللي بتعطيك تجربة لعب أسطورية ومظهر خارجي فخم لشخصيتك.';
-                section3Title.innerText = '📢 نصائح وحيل الاحتراف';
-                section3Text.innerText = 'أسرار وحيل جديدة بيستخدمها المحترفون لتطوير مهارات البناء والسرعة والسيطرة الكاملة في ساحات القتال.';
+                mainTitle.innerText = 'شبكة أخبار ماين كرافت';
+                mainDesc.innerText = 'أهلاً بك في الموقع الرسمي لأحدث أخبار سيرفر Zitrex ونمط Box PvP.';
                 footerText.innerHTML = 'جميع الحقوق محفوظة © 2026 Osama is Lion 🇵🇸';
             }
         }
